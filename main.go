@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
+	_ "github.com/nakagami/firebirdsql"
 )
 
 func main() {

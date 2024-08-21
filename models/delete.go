@@ -1,12 +1,9 @@
 package models
 
-import (
-	"API_FIRE/configs"
-	"database/sql"
-)
+import "API_FIRE/db"
 
 func Delete(id int64) (int64, error) {
-	conn, err := sql.Open("firebirdsql", configs.GetDBDSN())
+	conn, err := db.OpenConnection1()
 	if err != nil {
 		return 0, err
 	}

@@ -1,12 +1,9 @@
 package models
 
-import (
-	"API_FIRE/configs"
-	"database/sql"
-)
+import "API_FIRE/db"
 
 func Insert(todo Todo) (id int64, err error) {
-	conn, err := sql.Open("firebirdsql", configs.GetDBDSN())
+	conn, err := db.OpenConnection1()
 	if err != nil {
 		return
 	}

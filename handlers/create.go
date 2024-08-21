@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	_ "github.com/nakagami/firebirdsql"
 )
 
 func Create(w http.ResponseWriter, r *http.Request) {
@@ -17,9 +19,9 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
-
+	
 	id, err := models.Insert(todo)
-
+	
 	var resp map[string]any
 
 	if err != nil {

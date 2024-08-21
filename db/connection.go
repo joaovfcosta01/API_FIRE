@@ -4,6 +4,7 @@ import (
 	"API_FIRE/configs"
 	"database/sql"
 	"fmt"
+	"log"
 
 	_ "github.com/nakagami/firebirdsql" // Importa o driver Firebird
 )
@@ -32,4 +33,26 @@ func OpenConnection() (*sql.DB, error) {
 	}
 
 	return conn, nil
+}
+func OpenConnection1() (*sql.DB, error) {
+	conf := configs.GetDB()
+	// Montando a string de conexão
+	sc := fmt.Sprintf("%s:%s@%s:%s/%s", conf.User, conf.Pass, conf.Host, conf.Port, conf.Database)
+	// Abrindo a conexão
+	println(sc)
+	conn, err := sql.Open("firebirdsql", sc)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	//defer conn.Close()
+
+	// Testando a conexão
+	err = conn.Ping()
+	if err != nil {
+		log.Fatal("Failed to connect to database: ", err)
+	}
+
+	return conn, err
+
 }

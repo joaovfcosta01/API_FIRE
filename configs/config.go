@@ -29,7 +29,7 @@ func init() {
 	viper.SetDefault("api.port", "9050")
 	viper.SetDefault("database.host", "localhost")
 	viper.SetDefault("database.port", "3060") // Porta padrão do Firebird
-	viper.SetDefault("database.user", "sysdba")
+	viper.SetDefault("database.user", "SYSDBA")
 	viper.SetDefault("database.pass", "masterkey")
 	viper.SetDefault("database.name", "C:\\Users\\Usuario\\Desktop\\golang-firebird\\api_fire.fdb")
 }
@@ -60,14 +60,13 @@ func Load() error {
 }
 func GetDBDSN() string {
 	conf := GetDB()
-	return fmt.Sprintf(
-		"firebirdsql://%s:%s@%s:%s/%s",
-		conf.User,
-		conf.Pass,
-		conf.Host,
-		conf.Port,
-		conf.Database,
-	)
+	return fmt.Sprintf("firebirdsql://%s:%s@%s:%s/%s",
+	conf.User,
+	conf.Pass,
+	conf.Host,
+	conf.Port,
+	conf.Database,)
+
 }
 
 func GetDB() DBConfig {
